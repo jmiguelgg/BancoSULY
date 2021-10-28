@@ -11,6 +11,14 @@ public class Cuenta {
     double montoInicial;
     double saldo;
     Movimiento[] movimientos = new Movimiento[100];
+
+    public Movimiento[] getMovimientos() {
+        return movimientos;
+    }
+
+    public int getContadorMovimientos() {
+        return contadorMovimientos;
+    }
     private int contadorMovimientos;
 
     public Cuenta() {

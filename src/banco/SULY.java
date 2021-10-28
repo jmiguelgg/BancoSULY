@@ -14,6 +14,7 @@ import java.util.Date;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -366,7 +367,7 @@ public class SULY extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "id", "Tipo", "Monto", "Fecha"
             }
         ));
         jScrollPane1.setViewportView(tblMovimientos);
@@ -384,6 +385,7 @@ public class SULY extends javax.swing.JFrame {
         lblLogo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 710, 150));
 
+        lblSaldo.setFont(new java.awt.Font("Lucida Grande", 0, 18)); // NOI18N
         lblSaldo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(lblSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 720, 190, 40));
 
@@ -450,9 +452,21 @@ public class SULY extends javax.swing.JFrame {
     private void cboCuentaccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCuentaccActionPerformed
         Cliente clienteTmp = clientes[cboClientecc.getSelectedIndex()];
         Cuenta[] cuentasCliente = clienteTmp.getCuentas();
-        jLabel5.setText(cuentasCliente[cboCuentacc.getSelectedIndex()].getTipoCuenta());
-        jLabel23.setText(Double.toString(cuentasCliente[cboCuentacc.getSelectedIndex()].getMontoInicial()));
-        lblSaldo.setText(Double.toString(cuentasCliente[cboCuentacc.getSelectedIndex()].getSaldo()));
+        Cuenta cuentaSeleccionada = cuentasCliente[cboCuentacc.getSelectedIndex()];
+        jLabel5.setText(cuentaSeleccionada.getTipoCuenta());
+        jLabel23.setText(Double.toString(cuentaSeleccionada.getMontoInicial()));
+        lblSaldo.setText(Double.toString(cuentaSeleccionada.getSaldo()));
+        String[] cols = {"id", "Tipo", "Monto", "Fecha"};
+        String[][] data = new String[cuentaSeleccionada.getContadorMovimientos()][4];
+        Movimiento[] movimientos = cuentaSeleccionada.getMovimientos();
+        for (int i = 0; i < cuentaSeleccionada.getContadorMovimientos(); i++) {
+            data[i][0] = String.valueOf(movimientos[i].getIdMovimiento());
+            data[i][1] = movimientos[i].getTipomov();
+            data[i][2] = Double.toString(movimientos[i].getMonto());
+            data[i][3] = movimientos[i].getFecha();
+        }
+        DefaultTableModel model = new DefaultTableModel(data, cols);
+        tblMovimientos.setModel(model);
     }//GEN-LAST:event_cboCuentaccActionPerformed
 
     private void cboTPcnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTPcnActionPerformed
