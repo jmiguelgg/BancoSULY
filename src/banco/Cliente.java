@@ -3,9 +3,11 @@ package banco;
 public class Cliente {
 
     int idCliente;
+    private int contadorCuentas = 0;
     String nombre;
     String telefono;
     String direccion;
+    Cuenta[] cuentas = new Cuenta[50];
 
     public Cliente() {
 
@@ -48,6 +50,24 @@ public class Cliente {
 
     public void setDireccion(String direccion) {
         this.direccion = direccion;
+    }
+
+    public Cuenta[] getCuentas() {
+        return cuentas;
+    }
+
+    public void setCuentas(Cuenta[] cuentas) {
+        this.cuentas = cuentas;
+    }
+    
+    public void addCuenta(Cuenta nuevaCuenta) {
+        if (contadorCuentas < 50)
+            this.cuentas[contadorCuentas++] = nuevaCuenta;
+    }
+
+    @Override
+    public String toString() {
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + ", cuentas=" + cuentas + '}';
     }
 
 }

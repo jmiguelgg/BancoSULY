@@ -1,21 +1,28 @@
 package banco;
 
-public class Cuenta1 {
+public class Cuenta {
 
     int idCuenta;
-    int idCliente;
     String TipoCuenta;
     String fecha;
     double montoInicial;
-    
+  
+    Movimiento[] movimientos;
 
-    public Cuenta1() {
+    public Movimiento[] getMovimientos() {
+        return movimientos;
+    }
+
+    public void setMovimientos(Movimiento[] movimientos) {
+        this.movimientos = movimientos;
+    }
+
+    public Cuenta() {
 
     }
 
-    public Cuenta1(int idCuenta, int idCliente, String TipoCuenta, String fecha, double montoInicial) {
+    public Cuenta(int idCuenta, String TipoCuenta, String fecha, double montoInicial) {
         this.idCuenta = idCuenta;
-        this.idCliente = idCliente;
         this.TipoCuenta = TipoCuenta;
         this.fecha = fecha;
         this.montoInicial = montoInicial;
@@ -27,14 +34,6 @@ public class Cuenta1 {
 
     public void setIdCuenta(int idCuenta) {
         this.idCuenta = idCuenta;
-    }
-
-    public int getIdCliente() {
-        return idCliente;
-    }
-
-    public void setIdCliente(int idCliente) {
-        this.idCliente = idCliente;
     }
 
     public String getTipoCuenta() {
@@ -59,6 +58,11 @@ public class Cuenta1 {
 
     public void setMontoInicial(double montoInicial) {
         this.montoInicial = montoInicial;
+    }
+
+    @Override
+    public String toString() {
+        return "Cuenta{" + "idCuenta=" + idCuenta + ", TipoCuenta=" + TipoCuenta + ", fecha=" + fecha + ", montoInicial=" + montoInicial + ", movimientos=" + movimientos + '}';
     }
 
 }

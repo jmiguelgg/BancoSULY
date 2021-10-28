@@ -7,8 +7,13 @@ package banco;
 
 import java.awt.Color;
 import java.awt.Image;
+import java.util.List;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.Date;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -16,9 +21,11 @@ import javax.swing.ImageIcon;
  */
 public class SULY extends javax.swing.JFrame {
 
-    /**
-     * Creates new form SULY
-     */
+    Cliente[] clientes = new Cliente[20];
+    String[] tiposDeCuenta = new String[20];
+    int contadorClientes = 0;
+    int contadorTyposDeCuenta = 0;
+
     public SULY() {
         initComponents();
         this.setSize(1025, 880);
@@ -50,7 +57,7 @@ public class SULY extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         btnAgregarcl = new javax.swing.JButton();
         txtclTelefono = new javax.swing.JTextField();
-        txtclCliente = new javax.swing.JTextField();
+        txtclNombre = new javax.swing.JTextField();
         txtclDirec = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         jLabel6 = new javax.swing.JLabel();
@@ -119,15 +126,25 @@ public class SULY extends javax.swing.JFrame {
         btnAgregarcl.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         btnAgregarcl.setText("AGREGAR");
         btnAgregarcl.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(btnAgregarcl, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 210, 100, 40));
+        btnAgregarcl.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarclActionPerformed(evt);
+            }
+        });
+        jPanel1.add(btnAgregarcl, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 200, 100, 40));
 
         txtclTelefono.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         txtclTelefono.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel1.add(txtclTelefono, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 80, 110, 30));
 
-        txtclCliente.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
-        txtclCliente.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel1.add(txtclCliente, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 110, 30));
+        txtclNombre.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
+        txtclNombre.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        txtclNombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtclNombreActionPerformed(evt);
+            }
+        });
+        jPanel1.add(txtclNombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 110, 30));
 
         txtclDirec.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         txtclDirec.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -159,17 +176,27 @@ public class SULY extends javax.swing.JFrame {
 
         cboTPcn.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         cboTPcn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(cboTPcn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 90, 30));
+        jPanel2.add(cboTPcn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 90, 30));
 
         btnMascn.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         btnMascn.setText("+");
         btnMascn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(btnMascn, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 70, 30, 30));
+        btnMascn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnMascnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnMascn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 30, 30));
 
         btnAgregarcn.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         btnAgregarcn.setText("AGREGAR");
         btnAgregarcn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(btnAgregarcn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 210, 100, 40));
+        btnAgregarcn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarcnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btnAgregarcn, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 190, 100, 40));
 
         txtMontocn.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         txtMontocn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
@@ -225,7 +252,7 @@ public class SULY extends javax.swing.JFrame {
         txtMontomv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel3.add(txtMontomv, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 110, 30));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 310, 300));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 310, 290));
 
         jLabel13.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         jLabel13.setText("CONSULTAR CUENTA");
@@ -238,16 +265,21 @@ public class SULY extends javax.swing.JFrame {
 
         cboClientecc.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         cboClientecc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(cboClientecc, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, 80, 30));
+        getContentPane().add(cboClientecc, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, 140, 30));
 
         jLabel15.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         jLabel15.setText("Cuenta");
         jLabel15.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 480, 70, 30));
+        getContentPane().add(jLabel15, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 480, 70, 30));
 
         cboCuentacc.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         cboCuentacc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(cboCuentacc, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 480, 80, 30));
+        cboCuentacc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboCuentaccActionPerformed(evt);
+            }
+        });
+        getContentPane().add(cboCuentacc, new org.netbeans.lib.awtextra.AbsoluteConstraints(330, 480, 140, 30));
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder("Datos"));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -270,7 +302,7 @@ public class SULY extends javax.swing.JFrame {
         jLabel19.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         jLabel19.setText("MONTO INICIAL");
         jLabel19.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 220, -1, -1));
+        jPanel4.add(jLabel19, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 210, -1, -1));
 
         jLabel20.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         jLabel20.setText("NOMBRE");
@@ -279,25 +311,25 @@ public class SULY extends javax.swing.JFrame {
 
         jLabel4.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         jLabel4.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 110, 20));
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 90, 250, 20));
 
         jLabel5.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         jLabel5.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 110, 20));
+        jPanel4.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 170, 250, 20));
 
         jLabel23.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         jLabel23.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 220, 110, 20));
+        jPanel4.add(jLabel23, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 210, 250, 20));
 
         jLabel24.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         jLabel24.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel4.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 110, 20));
+        jPanel4.add(jLabel24, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 130, 250, 20));
 
         jLabel25.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         jLabel25.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 110, 20));
+        jPanel4.add(jLabel25, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 50, 250, 20));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 340, 260));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 520, 450, 260));
 
         tblMovimientos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -312,20 +344,21 @@ public class SULY extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tblMovimientos);
 
-        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 540, 490, 200));
+        getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 540, 490, 160));
 
+        jLabel21.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         jLabel21.setText("MOVIMIENTOS");
-        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 510, 120, 20));
+        getContentPane().add(jLabel21, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 510, 120, 20));
 
-        jLabel22.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
+        jLabel22.setFont(new java.awt.Font("Century Schoolbook", 1, 24)); // NOI18N
         jLabel22.setText("SALDO");
-        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(380, 750, 60, 20));
+        getContentPane().add(jLabel22, new org.netbeans.lib.awtextra.AbsoluteConstraints(500, 730, 100, 20));
 
         lblLogo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         getContentPane().add(lblLogo, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 10, 710, 150));
 
         lblSaldo.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        getContentPane().add(lblSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(450, 750, 80, 20));
+        getContentPane().add(lblSaldo, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 720, 190, 40));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -333,6 +366,57 @@ public class SULY extends javax.swing.JFrame {
     private void txtMontocnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtMontocnActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_txtMontocnActionPerformed
+
+    private void txtclNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtclNombreActionPerformed
+
+    }//GEN-LAST:event_txtclNombreActionPerformed
+
+    private void btnAgregarclActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarclActionPerformed
+
+        String nombre = txtclNombre.getText();
+        String telefono = txtclTelefono.getText();
+        String direccion = txtclDirec.getText();
+        Cliente newCliente = new Cliente(contadorClientes, nombre, telefono, direccion);
+        clientes[contadorClientes++] = newCliente;
+        List<String> clientesnombre = new ArrayList<String>();
+        for (int i = 0; i < contadorClientes; i++) {
+            clientesnombre.add(clientes[i].getNombre());
+        }
+        DefaultComboBoxModel comboModel = new DefaultComboBoxModel(clientesnombre.toArray());
+        cboClientecn.setModel(comboModel);
+        cboClientemv.setModel(comboModel);
+        cboClientecc.setModel(comboModel);
+    }//GEN-LAST:event_btnAgregarclActionPerformed
+
+    private void btnMascnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMascnActionPerformed
+        String acounttype = JOptionPane.showInputDialog(null, "INGRESA EL TIPO DE CUENTA");
+        tiposDeCuenta[contadorTyposDeCuenta++] = acounttype;
+
+        DefaultComboBoxModel comboModel = new DefaultComboBoxModel(tiposDeCuenta);
+        cboTPcn.setModel(comboModel);
+    }//GEN-LAST:event_btnMascnActionPerformed
+
+    private void btnAgregarcnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarcnActionPerformed
+        String cliente = (String) cboClientecn.getSelectedItem();
+        String tipoCuentaSeleccionado = (String) cboTPcn.getSelectedItem();
+        String montoInicial = txtMontocn.getText();
+        String fecha = new Date().toString();
+        Cliente tmp = null;
+        int indexCliente = 0;
+        for (int i = 0; i < contadorClientes; i++) {
+            if (clientes[i].getNombre() == cliente) {
+                tmp = clientes[i];
+                indexCliente = i;
+            }
+        }
+        Cuenta nuevaCuenta = new Cuenta(tmp.getCuentas().length, tipoCuentaSeleccionado, fecha, Double.parseDouble(montoInicial));
+        tmp.addCuenta(nuevaCuenta);
+        clientes[indexCliente] = tmp;
+    }//GEN-LAST:event_btnAgregarcnActionPerformed
+
+    private void cboCuentaccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCuentaccActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboCuentaccActionPerformed
 
     /**
      * @param args the command line arguments
@@ -417,8 +501,8 @@ public class SULY extends javax.swing.JFrame {
     private javax.swing.JTable tblMovimientos;
     private javax.swing.JTextField txtMontocn;
     private javax.swing.JTextField txtMontomv;
-    private javax.swing.JTextField txtclCliente;
     private javax.swing.JTextField txtclDirec;
+    private javax.swing.JTextField txtclNombre;
     private javax.swing.JTextField txtclTelefono;
     // End of variables declaration//GEN-END:variables
 }

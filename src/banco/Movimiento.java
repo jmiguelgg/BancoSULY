@@ -3,7 +3,7 @@ package banco;
 public class Movimiento {
 
     int idMovimiento;
-    int idCuenta;
+   
     double monto;
     String fecha;
     String tipomov;
@@ -14,7 +14,7 @@ public class Movimiento {
 
     public Movimiento(int idMovimiento, int idCuenta, double monto, String fecha, String tipomov) {
         this.idMovimiento = idMovimiento;
-        this.idCuenta = idCuenta;
+      
         this.monto = monto;
         this.fecha = fecha;
         this.tipomov = tipomov;
@@ -28,13 +28,6 @@ public class Movimiento {
         this.idMovimiento = idMovimiento;
     }
 
-    public int getIdCuenta() {
-        return idCuenta;
-    }
-
-    public void setIdCuenta(int idCuenta) {
-        this.idCuenta = idCuenta;
-    }
 
     public double getMonto() {
         return monto;
