@@ -70,6 +70,10 @@ public class Cuenta {
         return true;
     }
 
+    public double getSaldo() {
+        return saldo;
+    }
+
     @Override
     public String toString() {
         return "Cuenta{" + "idCuenta=" + idCuenta + ", TipoCuenta=" + TipoCuenta + ", fecha=" + fecha + ", montoInicial=" + montoInicial + ", saldo=" + saldo + ", movimientos=" + Arrays.toString(movimientos) + '}';

@@ -287,6 +287,11 @@ public class SULY extends javax.swing.JFrame {
 
         cboClientecc.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         cboClientecc.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        cboClientecc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboClienteccActionPerformed(evt);
+            }
+        });
         getContentPane().add(cboClientecc, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 480, 140, 30));
 
         jLabel15.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
@@ -411,6 +416,11 @@ public class SULY extends javax.swing.JFrame {
         cboClientecn.setModel(comboModel1);
         cboClientemv.setModel(comboModel2);
         cboClientecc.setModel(comboModel3);
+        jLabel25.setText(nombre);
+        jLabel4.setText(telefono);
+        jLabel24.setText(direccion);
+        jLabel5.setText("");
+        jLabel23.setText("");
     }//GEN-LAST:event_btnAgregarclActionPerformed
 
     private void btnMascnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMascnActionPerformed
@@ -430,10 +440,19 @@ public class SULY extends javax.swing.JFrame {
         Cuenta nuevaCuenta = new Cuenta(clienteTmp.siguienteIdCuenta(), tipoCuentaSeleccionado, fecha, Double.parseDouble(montoInicial));
         clienteTmp.addCuenta(nuevaCuenta);
         clientes[indexCliente] = clienteTmp;
+        jLabel25.setText(clienteTmp.getNombre());
+        jLabel4.setText(clienteTmp.getTelefono());
+        jLabel24.setText(clienteTmp.getDireccion());
+        jLabel5.setText(tipoCuentaSeleccionado);
+        jLabel23.setText(montoInicial);
     }//GEN-LAST:event_btnAgregarcnActionPerformed
 
     private void cboCuentaccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCuentaccActionPerformed
-        // TODO add your handling code here:
+        Cliente clienteTmp = clientes[cboClientecc.getSelectedIndex()];
+        Cuenta[] cuentasCliente = clienteTmp.getCuentas();
+        jLabel5.setText(cuentasCliente[cboCuentacc.getSelectedIndex()].getTipoCuenta());
+        jLabel23.setText(Double.toString(cuentasCliente[cboCuentacc.getSelectedIndex()].getMontoInicial()));
+        lblSaldo.setText(Double.toString(cuentasCliente[cboCuentacc.getSelectedIndex()].getSaldo()));
     }//GEN-LAST:event_cboCuentaccActionPerformed
 
     private void cboTPcnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTPcnActionPerformed
@@ -467,8 +486,23 @@ public class SULY extends javax.swing.JFrame {
             clienteTmp.setCuentas(cuentasCliente);
             clientes[indexCliente] = clienteTmp;
         }
-        System.out.println(clienteTmp);
     }//GEN-LAST:event_btnAgregarmvActionPerformed
+
+    private void cboClienteccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboClienteccActionPerformed
+        Cliente clienteTmp = clientes[cboClientecc.getSelectedIndex()];
+        jLabel25.setText(clienteTmp.getNombre());
+        jLabel4.setText(clienteTmp.getTelefono());
+        jLabel24.setText(clienteTmp.getDireccion());
+        jLabel5.setText("");
+        jLabel23.setText("");
+        Cuenta[] cuentasCliente = clienteTmp.getCuentas();
+        String[] nombreCuentas = new String[clienteTmp.getContadorCuentas()];
+        for (int i = 0; i < clienteTmp.getContadorCuentas(); i++) {
+            nombreCuentas[i] = cuentasCliente[i].getTipoCuenta();
+        }
+        DefaultComboBoxModel comboModel = new DefaultComboBoxModel(nombreCuentas);
+        cboCuentacc.setModel(comboModel);
+    }//GEN-LAST:event_cboClienteccActionPerformed
 
     /**
      * @param args the command line arguments
