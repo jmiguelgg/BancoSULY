@@ -23,6 +23,7 @@ public class SULY extends javax.swing.JFrame {
 
     Cliente[] clientes = new Cliente[20];
     String[] tiposDeCuenta = new String[20];
+    String[] tipoMovimiento = {"Deposito", "Retiro"};
     int contadorClientes = 0;
     int contadorTyposDeCuenta = 0;
 
@@ -172,11 +173,16 @@ public class SULY extends javax.swing.JFrame {
 
         cboClientecn.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         cboClientecn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(cboClientecn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 20, 90, 30));
+        jPanel2.add(cboClientecn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, 160, 30));
 
         cboTPcn.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         cboTPcn.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel2.add(cboTPcn, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 70, 90, 30));
+        cboTPcn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTPcnActionPerformed(evt);
+            }
+        });
+        jPanel2.add(cboTPcn, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 70, 120, 30));
 
         btnMascn.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         btnMascn.setText("+");
@@ -186,7 +192,7 @@ public class SULY extends javax.swing.JFrame {
                 btnMascnActionPerformed(evt);
             }
         });
-        jPanel2.add(btnMascn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 30, 30));
+        jPanel2.add(btnMascn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 70, 30, 30));
 
         btnAgregarcn.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         btnAgregarcn.setText("AGREGAR");
@@ -205,7 +211,7 @@ public class SULY extends javax.swing.JFrame {
                 txtMontocnActionPerformed(evt);
             }
         });
-        jPanel2.add(txtMontocn, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 110, 30));
+        jPanel2.add(txtMontocn, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 120, 160, 30));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 170, 320, 280));
 
@@ -234,23 +240,39 @@ public class SULY extends javax.swing.JFrame {
 
         cboClientemv.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         cboClientemv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.add(cboClientemv, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 30, 80, 30));
+        cboClientemv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboClientemvActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cboClientemv, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 30, 160, 30));
 
         cboCuentamv.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         cboCuentamv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.add(cboCuentamv, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 80, 80, 30));
+        jPanel3.add(cboCuentamv, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 80, 160, 30));
 
         cboTPmv.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
+        cboTPmv.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Deposito", "Retiro" }));
         cboTPmv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.add(cboTPmv, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 180, 70, 30));
+        cboTPmv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cboTPmvActionPerformed(evt);
+            }
+        });
+        jPanel3.add(cboTPmv, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 110, 30));
 
         btnAgregarmv.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         btnAgregarmv.setText("AGREGAR");
+        btnAgregarmv.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarmvActionPerformed(evt);
+            }
+        });
         jPanel3.add(btnAgregarmv, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 230, 120, 40));
 
         txtMontomv.setFont(new java.awt.Font("Century Schoolbook", 1, 14)); // NOI18N
         txtMontomv.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
-        jPanel3.add(txtMontomv, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 130, 110, 30));
+        jPanel3.add(txtMontomv, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 130, 160, 30));
 
         getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(680, 170, 310, 290));
 
@@ -382,10 +404,13 @@ public class SULY extends javax.swing.JFrame {
         for (int i = 0; i < contadorClientes; i++) {
             clientesnombre.add(clientes[i].getNombre());
         }
-        DefaultComboBoxModel comboModel = new DefaultComboBoxModel(clientesnombre.toArray());
-        cboClientecn.setModel(comboModel);
-        cboClientemv.setModel(comboModel);
-        cboClientecc.setModel(comboModel);
+        DefaultComboBoxModel comboModel1, comboModel2, comboModel3;
+        comboModel1 = new DefaultComboBoxModel(clientesnombre.toArray());
+        comboModel2 = new DefaultComboBoxModel(clientesnombre.toArray());
+        comboModel3 = new DefaultComboBoxModel(clientesnombre.toArray());
+        cboClientecn.setModel(comboModel1);
+        cboClientemv.setModel(comboModel2);
+        cboClientecc.setModel(comboModel3);
     }//GEN-LAST:event_btnAgregarclActionPerformed
 
     private void btnMascnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnMascnActionPerformed
@@ -397,26 +422,53 @@ public class SULY extends javax.swing.JFrame {
     }//GEN-LAST:event_btnMascnActionPerformed
 
     private void btnAgregarcnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarcnActionPerformed
-        String cliente = (String) cboClientecn.getSelectedItem();
         String tipoCuentaSeleccionado = (String) cboTPcn.getSelectedItem();
         String montoInicial = txtMontocn.getText();
         String fecha = new Date().toString();
-        Cliente tmp = null;
-        int indexCliente = 0;
-        for (int i = 0; i < contadorClientes; i++) {
-            if (clientes[i].getNombre() == cliente) {
-                tmp = clientes[i];
-                indexCliente = i;
-            }
-        }
-        Cuenta nuevaCuenta = new Cuenta(tmp.getCuentas().length, tipoCuentaSeleccionado, fecha, Double.parseDouble(montoInicial));
-        tmp.addCuenta(nuevaCuenta);
-        clientes[indexCliente] = tmp;
+        int indexCliente = cboClientecc.getSelectedIndex();
+        Cliente clienteTmp = clientes[indexCliente];
+        Cuenta nuevaCuenta = new Cuenta(clienteTmp.siguienteIdCuenta(), tipoCuentaSeleccionado, fecha, Double.parseDouble(montoInicial));
+        clienteTmp.addCuenta(nuevaCuenta);
+        clientes[indexCliente] = clienteTmp;
     }//GEN-LAST:event_btnAgregarcnActionPerformed
 
     private void cboCuentaccActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboCuentaccActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_cboCuentaccActionPerformed
+
+    private void cboTPcnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTPcnActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboTPcnActionPerformed
+
+    private void cboClientemvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboClientemvActionPerformed
+        Cliente clienteTmp = clientes[cboClientecc.getSelectedIndex()];
+        Cuenta[] cuentasCliente = clienteTmp.getCuentas();
+        String[] nombreCuentas = new String[clienteTmp.getContadorCuentas()];
+        for (int i = 0; i < clienteTmp.getContadorCuentas(); i++) {
+            nombreCuentas[i] = cuentasCliente[i].getTipoCuenta();
+        }
+        DefaultComboBoxModel comboModel = new DefaultComboBoxModel(nombreCuentas);
+        cboCuentamv.setModel(comboModel);
+    }//GEN-LAST:event_cboClientemvActionPerformed
+
+    private void cboTPmvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cboTPmvActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cboTPmvActionPerformed
+
+    private void btnAgregarmvActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarmvActionPerformed
+        int indexCliente = cboClientecc.getSelectedIndex();
+        Cliente clienteTmp = clientes[indexCliente];
+        int indexCuenta = cboCuentamv.getSelectedIndex();
+        double monto = Double.parseDouble(txtMontomv.getText());
+        String tipoMovimiento = (String) cboTPmv.getSelectedItem();
+        Cuenta[] cuentasCliente = clienteTmp.getCuentas();
+        boolean estadoMovimiento = cuentasCliente[indexCuenta].crearMovimiento(monto, tipoMovimiento);
+        if (estadoMovimiento) {
+            clienteTmp.setCuentas(cuentasCliente);
+            clientes[indexCliente] = clienteTmp;
+        }
+        System.out.println(clienteTmp);
+    }//GEN-LAST:event_btnAgregarmvActionPerformed
 
     /**
      * @param args the command line arguments

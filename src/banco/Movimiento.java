@@ -3,7 +3,6 @@ package banco;
 public class Movimiento {
 
     int idMovimiento;
-   
     double monto;
     String fecha;
     String tipomov;
@@ -12,9 +11,8 @@ public class Movimiento {
 
     }
 
-    public Movimiento(int idMovimiento, int idCuenta, double monto, String fecha, String tipomov) {
+    public Movimiento(int idMovimiento, double monto, String fecha, String tipomov) {
         this.idMovimiento = idMovimiento;
-      
         this.monto = monto;
         this.fecha = fecha;
         this.tipomov = tipomov;
@@ -51,6 +49,11 @@ public class Movimiento {
 
     public void setTipomov(String tipomov) {
         this.tipomov = tipomov;
+    }
+
+    @Override
+    public String toString() {
+        return "Movimiento{" + "idMovimiento=" + idMovimiento + ", monto=" + monto + ", fecha=" + fecha + ", tipomov=" + tipomov + '}';
     }
 
 }

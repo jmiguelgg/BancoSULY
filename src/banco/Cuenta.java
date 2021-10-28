@@ -1,21 +1,17 @@
 package banco;
 
+import java.util.Arrays;
+import java.util.Date;
+
 public class Cuenta {
 
     int idCuenta;
     String TipoCuenta;
     String fecha;
     double montoInicial;
-  
-    Movimiento[] movimientos;
-
-    public Movimiento[] getMovimientos() {
-        return movimientos;
-    }
-
-    public void setMovimientos(Movimiento[] movimientos) {
-        this.movimientos = movimientos;
-    }
+    double saldo;
+    Movimiento[] movimientos = new Movimiento[100];
+    private int contadorMovimientos;
 
     public Cuenta() {
 
@@ -26,6 +22,8 @@ public class Cuenta {
         this.TipoCuenta = TipoCuenta;
         this.fecha = fecha;
         this.montoInicial = montoInicial;
+        this.saldo = montoInicial;
+        this.contadorMovimientos = 0;
     }
 
     public int getIdCuenta() {
@@ -59,10 +57,22 @@ public class Cuenta {
     public void setMontoInicial(double montoInicial) {
         this.montoInicial = montoInicial;
     }
+    
+    public boolean crearMovimiento(double monto, String tipo) {
+        if (tipo.equals("Retiro") && (this.saldo - monto) < 0.0)
+            return false;
+        Movimiento movimiento = new Movimiento(this.contadorMovimientos, monto, new Date().toString(), tipo);
+        this.movimientos[contadorMovimientos++] = movimiento;
+        if (tipo.equals("Retiro"))
+            this.saldo -= monto;
+        else
+            this.saldo += monto;
+        return true;
+    }
 
     @Override
     public String toString() {
-        return "Cuenta{" + "idCuenta=" + idCuenta + ", TipoCuenta=" + TipoCuenta + ", fecha=" + fecha + ", montoInicial=" + montoInicial + ", movimientos=" + movimientos + '}';
+        return "Cuenta{" + "idCuenta=" + idCuenta + ", TipoCuenta=" + TipoCuenta + ", fecha=" + fecha + ", montoInicial=" + montoInicial + ", saldo=" + saldo + ", movimientos=" + Arrays.toString(movimientos) + '}';
     }
 
 }

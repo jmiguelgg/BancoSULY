@@ -1,5 +1,7 @@
 package banco;
 
+import java.util.Arrays;
+
 public class Cliente {
 
     int idCliente;
@@ -64,10 +66,18 @@ public class Cliente {
         if (contadorCuentas < 50)
             this.cuentas[contadorCuentas++] = nuevaCuenta;
     }
+    
+    public int siguienteIdCuenta() {
+        return contadorCuentas;
+    }
+    
+    public int getContadorCuentas() {
+        return contadorCuentas;
+    }
 
     @Override
     public String toString() {
-        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + ", cuentas=" + cuentas + '}';
+        return "Cliente{" + "idCliente=" + idCliente + ", nombre=" + nombre + ", telefono=" + telefono + ", direccion=" + direccion + ", cuentas=" + Arrays.toString(cuentas) + '}';
     }
 
 }
